@@ -152,12 +152,17 @@ var x = io.get_number(<prompt>, <output after input a invalid number>);
 `io.get_number()` is similar to this Python code:
 
 ```python
-while(True):
-    try:
-        x = int(input("<prompt>"))
-        break
-    except ValueError:
-        print("<output after input a invalid number>")
+def get_number(input_tip, bad_value, white_list):
+    print(input_tip)
+    while(True):
+        try:
+            s = input("<prompt>")
+            if s in white_list:
+                break
+            x = int(s)
+            break
+        except ValueError:
+            print(bad_value)
 ```
 
 #### Example of `io.get_number()`
@@ -318,6 +323,20 @@ for (var i = 0; i < 10; i += 1){
 //output:
 //1
 //3
+```
+
+You can also tag the loop like this:
+```phi
+import io;
+
+// the while loop is the same as for.
+for: outer_loop (var i = 0; i < 10; i += 1){
+    for (var j = 0; j < 10; j += 1){
+        io.print(j);
+        if (j == 5 && i == 5)
+            break outer_loop;
+    }
+}
 ```
 
 ### List Syntax
